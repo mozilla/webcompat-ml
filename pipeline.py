@@ -1,33 +1,22 @@
-import pandas as pd
-import numpy as np
+import csv
 import json
 import os
-import csv
 import sys
 import warnings
 from datetime import datetime
 from math import floor
-from sklearn.preprocessing import (
-    LabelBinarizer,
-    LabelEncoder,
-    StandardScaler,
-    MinMaxScaler,
-)
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
-from sklearn.metrics import (
-    log_loss,
-    accuracy_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    roc_curve,
-    auc,
-    mean_squared_error,
-    mean_absolute_error,
-    r2_score,
-)
-from sklearn.feature_extraction.text import CountVectorizer
+
+import numpy as np
+import pandas as pd
 import xgboost as xgb
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import (accuracy_score, auc, f1_score, log_loss,
+                             mean_absolute_error, mean_squared_error,
+                             precision_score, r2_score, recall_score,
+                             roc_curve)
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
+from sklearn.preprocessing import (LabelBinarizer, LabelEncoder, MinMaxScaler,
+                                   StandardScaler)
 
 
 def build_encoders(df):
