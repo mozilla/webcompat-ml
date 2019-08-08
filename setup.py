@@ -12,9 +12,9 @@ setup(
     author="John Giannelos",
     author_email="jgiannelos@mozilla.com",
     description="WebCompat machine learning pipeline",
-    packages=find_packages(where='src'),
-    package_dir={'': 'src'},
-    install_requires=[],
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    install_requires=["scikit-learn", "pandas", "xgboost"],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
