@@ -3,8 +3,12 @@ import argparse
 import pandas as pd
 import xgboost as xgb
 
-from pipeline import *
-
+from webcompat_ml.models.invalid.pipeline import (
+    build_encoders,
+    load_encoders,
+    model_predict,
+    model_train,
+)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
