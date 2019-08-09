@@ -13,7 +13,8 @@ setup(
     author_email="jgiannelos@mozilla.com",
     description="WebCompat machine learning pipeline",
     packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    package_dir={"webcompat_ml": "src/webcompat_ml"},
+    package_data={"webcompat_ml": ["models/invalid/model.bin"]},
     install_requires=["scikit-learn", "pandas", "xgboost"],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
