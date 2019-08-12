@@ -14,7 +14,13 @@ setup(
     description="WebCompat machine learning pipeline",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    package_data={"": ["models/invalid/model.bin"]},
+    package_data={
+        "": [
+            "models/invalid/model.bin",
+            "models/invalid/encoders/*",
+            "models/invalid/metadata/*",
+        ]
+    },
     install_requires=["scikit-learn", "pandas", "xgboost"],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
