@@ -21,6 +21,11 @@ setup(
             "models/invalid/metadata/*",
         ]
     },
+    entry_points = {
+        'console_scripts': [
+            'webcompat-ml-invalid=webcompat_ml.models.invalid.cli:main'
+        ]
+    },
     install_requires=["scikit-learn", "pandas", "xgboost"],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

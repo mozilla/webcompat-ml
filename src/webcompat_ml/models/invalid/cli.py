@@ -10,7 +10,7 @@ from webcompat_ml.models.invalid.pipeline import (
     model_train,
 )
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(
         description="A script which utilizes a model trained to predict invalid webcompat issues."
         "Script created using automl-gs (https://github.com/minimaxir/automl-gs)"
@@ -54,3 +54,7 @@ if __name__ == "__main__":
         if args.type == "json":
             with open("predictions.json", "w", encoding="utf-8") as f:
                 f.write(predictions.to_json(orient="records"))
+
+
+if __name__=="__main__":
+    main()
