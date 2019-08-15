@@ -10,6 +10,7 @@ from webcompat_ml.models.invalid.pipeline import (
     model_train,
 )
 
+
 def main():
     parser = argparse.ArgumentParser(
         description="A script which utilizes a model trained to predict invalid webcompat issues."
@@ -56,5 +57,5 @@ def main():
                 f.write(predictions.to_json(orient="records"))
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
