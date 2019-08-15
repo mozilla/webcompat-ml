@@ -31,9 +31,9 @@ def prepare_gh_event_invalid(obj):
     """Prepare a dataframe to run a prediction task"""
 
     issue = {
-        "body": obj["issue"]["body"],
-        "title": obj["issue"]["title"],
-        "labels": extract_gh_labels({"labels": obj["issue"]["labels"]}),
+        "body": obj["body"],
+        "title": obj["title"],
+        "labels": extract_gh_labels({"labels": obj["labels"]}),
         "invalid": "",
     }
 
