@@ -19,6 +19,7 @@ setup(
             "models/invalid/model.bin",
             "models/invalid/encoders/*",
             "models/invalid/metadata/*",
+            "utils/encoders/*.joblib"
         ]
     },
     entry_points={
