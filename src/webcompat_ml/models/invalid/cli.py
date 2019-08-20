@@ -1,4 +1,5 @@
 import argparse
+from importlib.resources import path as importlib_path
 
 import pandas as pd
 import xgboost as xgb
@@ -48,7 +49,12 @@ def main():
     elif args.mode == "predict":
         encoders = load_encoders()
         model = xgb.Booster()
-        model.load_model("model.bin")
+        module = 'webcompat_ml.models.invalid'
+        filename = 'model.bin'
+
+        with importlib_path(module, filename) as path:
+            model.load_model(path.as_posix())
+
         predictions = model_predict(df, model, encoders)
         if args.type == "csv":
             predictions.to_csv("predictions.csv", index=False)

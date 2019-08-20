@@ -5,6 +5,7 @@ import sys
 import warnings
 from datetime import datetime
 from math import floor
+from importlib.resources import path as importlib_path
 
 import numpy as np
 import pandas as pd
@@ -84,37 +85,29 @@ def load_encoders():
     # Text
     tokenizer = CountVectorizer(max_features=10000)
 
-    with open(
-        os.path.join("encoders", "model_vocab.json"),
-        "r",
-        encoding="utf8",
-        errors="ignore",
-    ) as infile:
-        tokenizer.vocabulary_ = json.load(infile)
+    module = "webcompat_ml.models.invalid.encoders"
+    filename = "model_vocab.json"
+    with importlib_path(module, filename) as path:
+        with open(path, "r", encoding="utf8", errors="ignore") as infile:
+            tokenizer.vocabulary_ = json.load(infile)
     encoders["tokenizer"] = tokenizer
 
     # labels
     labels_encoder = LabelBinarizer()
 
-    with open(
-        os.path.join("encoders", "labels_encoder.json"),
-        "r",
-        encoding="utf8",
-        errors="ignore",
-    ) as infile:
-        labels_encoder.classes_ = json.load(infile)
+    filename = "labels_encoder.json"
+    with importlib_path(module, filename) as path:
+        with open(path, "r", encoding="utf8", errors="ignore") as infile:
+            labels_encoder.classes_ = json.load(infile)
     encoders["labels_encoder"] = labels_encoder
 
     # Target Field: invalid
     invalid_encoder = LabelEncoder()
 
-    with open(
-        os.path.join("encoders", "invalid_encoder.json"),
-        "r",
-        encoding="utf8",
-        errors="ignore",
-    ) as infile:
-        invalid_encoder.classes_ = np.array(json.load(infile))
+    filename = "invalid_encoder.json"
+    with importlib_path(module, filename) as path:
+        with open(path, "r", encoding="utf8", errors="ignore") as infile:
+            invalid_encoder.classes_ = np.array(json.load(infile))
     encoders["invalid_encoder"] = invalid_encoder
 
     return encoders

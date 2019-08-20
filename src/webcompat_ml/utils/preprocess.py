@@ -1,5 +1,7 @@
 import os
 
+from importlib.resources import path as importlib_path
+
 import pandas
 import joblib
 
@@ -19,10 +21,11 @@ def extract_categorical(df, columns):
 
     for column in columns:
         filename = "{}_LabelEncoder.joblib".format(column)
-        path = os.path.join("encoders", filename)
-        encoder = joblib.load(path)
+        module = 'webcompat_ml.utils.encoders'
 
-        df[column] = encoder.fit_transform(df[column])
+        with importlib_path(module, filename) as p:
+            encoder = joblib.load(p)
+            df[column] = df[column].apply(encoder.fit_transform)
 
     return df
 
