@@ -26,7 +26,7 @@ def extract_categorical(df, columns):
 
         with importlib_path(module, filename) as p:
             encoder = joblib.load(p)
-            df[column] = df[column].apply(encoder.fit_transform)
+            df[column] = encoder.fit_transform(df[column])
 
     return df
 
