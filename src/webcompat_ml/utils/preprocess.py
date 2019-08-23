@@ -8,7 +8,8 @@ import joblib
 
 def extract_gh_labels(obj):
     """Extract labels from GH API responses"""
-    return sorted([label["name"] for label in obj["labels"]])
+    labels = sorted([label["name"] for label in obj["labels"]])
+    return " ".join(labels)
 
 
 def handle_empty_values(df):
