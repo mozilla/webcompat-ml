@@ -22,7 +22,7 @@ def extract_categorical(df, columns):
 
     for column in columns:
         filename = "{}_LabelEncoder.joblib".format(column)
-        module = 'webcompat_ml.utils.encoders'
+        module = "webcompat_ml.utils.encoders"
 
         with importlib_path(module, filename) as p:
             encoder = joblib.load(p)

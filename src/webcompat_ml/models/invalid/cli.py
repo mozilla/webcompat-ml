@@ -49,8 +49,8 @@ def main():
     elif args.mode == "predict":
         encoders = load_encoders()
         model = xgb.Booster()
-        module = 'webcompat_ml.models.invalid'
-        filename = 'model.bin'
+        module = "webcompat_ml.models.invalid"
+        filename = "model.bin"
 
         with importlib_path(module, filename) as path:
             model.load_model(path.as_posix())
