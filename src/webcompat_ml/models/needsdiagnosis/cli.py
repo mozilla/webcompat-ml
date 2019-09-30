@@ -31,7 +31,7 @@ def predict(data, model, output):
     model = joblib.load(model)
     predictions = model.predict(X)
     predictions = pandas.DataFrame(data=predictions, columns=["predictions"])
-    predictions.to_csv("output", index=False)
+    predictions.to_csv(output, index=False)
 
 
 if __name__ == "__main__":
