@@ -3,6 +3,7 @@ import pandas
 
 from sklearn.base import ClassifierMixin, BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
@@ -49,6 +50,10 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
             eval_set=eval_set,
             verbose=True,
         )
+
+        y_pred = self.clf.predict(X_test)
+        print(classification_report(y_test, y_pred))
+
         return self
 
     def predict(self, X):
