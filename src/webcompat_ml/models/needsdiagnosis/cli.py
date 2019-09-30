@@ -29,8 +29,9 @@ def train(data, output):
 def predict(data, model, output):
     X = pandas.read_csv(data)
     model = joblib.load(model)
-    predictions = pandas.DataFrame(model.predict(X), headers="probability")
-    predictions.to_json(output)
+    predictions = model.predict(X)
+    output = pandas.DataFrame(data=predictions, headers=['predictions'])
+    return predictions
 
 
 if __name__ == "__main__":

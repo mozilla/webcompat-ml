@@ -52,5 +52,7 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         return self
 
     def predict(self, X):
-        proba = self.clf.predict(X)
-        return numpy.round(proba)
+        body = self.tokenizer.transform(X["body"].values).toarray()
+        title = self.tokenizer.transform(X["title"].values).toarray()
+        X = numpy.hstack([body, title])
+        return self.clf.predict(X)
