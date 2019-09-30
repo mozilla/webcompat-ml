@@ -30,7 +30,7 @@ def predict(data, model, output):
     X = pandas.read_csv(data)
     model = joblib.load(model)
     predictions = model.predict(X)
-    output = pandas.DataFrame(data=predictions, headers=['predictions'])
+    output = pandas.DataFrame(data=predictions, headers=["predictions"])
     return predictions
 
 
