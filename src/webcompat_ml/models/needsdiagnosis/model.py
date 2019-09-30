@@ -10,6 +10,8 @@ from xgboost import XGBClassifier
 
 
 class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
+    """Model to predict needsdiagnosis flags"""
+
     def __init__(self):
         self.xgb_params = {
             "eta": 0.1,
@@ -27,6 +29,13 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         self.le = LabelEncoder()
 
     def preprocess(self, X, y):
+        """Preprocess data
+
+        * body, title: Tokenize input
+        * needsdiagnosis: Encode labels
+
+        """
+
         corpus = pandas.concat([X["body"], X["title"]], axis=0).tolist()
         self.tokenizer = CountVectorizer(max_features=10000)
         self.tokenizer.fit(corpus)
@@ -39,6 +48,8 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         return (X, y)
 
     def fit(self, X, y):
+        """Fit the XGBClassifier used for the model"""
+
         X, y = self.preprocess(X, y)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
         eval_set = [(X_test, y_test)]
@@ -57,6 +68,7 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         return self
 
     def predict(self, X):
+        """Predict needsdiagnosis flags"""
         body = self.tokenizer.transform(X["body"].values).toarray()
         title = self.tokenizer.transform(X["title"].values).toarray()
         X = numpy.hstack([body, title])
