@@ -3,7 +3,7 @@ import pandas
 
 from sklearn.base import ClassifierMixin, BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
@@ -12,7 +12,7 @@ from xgboost import XGBClassifier
 class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
     """Model to predict needsdiagnosis flags"""
 
-    def __init__(self):
+    def __init__(self, verbose=True):
         self.xgb_params = {
             "eta": 0.1,
             "max_depth": 7,
@@ -27,6 +27,7 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         }
         self.clf = XGBClassifier(**self.xgb_params)
         self.le = LabelEncoder()
+        self.verbose = verbose
 
     def preprocess(self, X, y):
         """Preprocess data
@@ -51,19 +52,22 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         """Fit the XGBClassifier used for the model"""
 
         X, y = self.preprocess(X, y)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-        eval_set = [(X_test, y_test)]
+        X_train, X_eval, y_train, y_eval = train_test_split(X, y, test_size=0.3)
+        eval_set = [(X_eval, y_eval)]
         self.clf.fit(
             X_train,
             y_train,
             early_stopping_rounds=10,
             eval_metric="logloss",
             eval_set=eval_set,
-            verbose=True,
+            verbose=self.verbose,
         )
 
-        y_pred = self.clf.predict(X_test)
-        print(classification_report(y_test, y_pred))
+        y_pred = self.clf.predict(X_eval)
+
+        if self.verbose:
+            print(classification_report(y_eval, y_pred))
+            print(confusion_matrix(y_eval, y_pred))
 
         return self
 
