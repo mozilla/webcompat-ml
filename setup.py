@@ -23,7 +23,10 @@ setup(
         ]
     },
     entry_points={
-        "console_scripts": ["webcompat-ml-invalid=webcompat_ml.models.invalid.cli:main"]
+        "console_scripts": [
+            "webcompat-ml-invalid=webcompat_ml.models.invalid.cli:main",
+            "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main"
+        ]
     },
     install_requires=["scikit-learn", "pandas", "xgboost"],
     classifiers=[
