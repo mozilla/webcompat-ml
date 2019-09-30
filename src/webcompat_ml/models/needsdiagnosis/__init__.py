@@ -1,1 +1,1 @@
-from model import NeedsDiagnosisModel  # noqa
+from .model import NeedsDiagnosisModel  # noqa

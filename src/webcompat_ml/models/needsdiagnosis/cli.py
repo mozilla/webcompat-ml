@@ -6,11 +6,11 @@ from webcompat_ml.models.needsdiagnosis import NeedsDiagnosisModel
 
 
 @click.group()
-def cli():
+def main():
     pass
 
 
-@cli.command()
+@main.command()
 @click.option("--data", help="Path to dataset CSV")
 @click.option("--output", help="Path to model binary path", default="model.bin")
 def train(data, output):
@@ -22,7 +22,7 @@ def train(data, output):
     joblib.dump(model, output)
 
 
-@cli.command()
+@main.command()
 @click.option("--data", help="Path to input CSV")
 @click.option("--model", help="Path to binary model")
 @click.option("--output", help="Predictions output")
@@ -35,4 +35,4 @@ def predict(data, model, output):
 
 
 if __name__ == "__main__":
-    cli()
+    main()

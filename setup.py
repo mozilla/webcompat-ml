@@ -28,7 +28,7 @@ setup(
             "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main"
         ]
     },
-    install_requires=["scikit-learn", "pandas", "xgboost"],
+    install_requires=["scikit-learn", "pandas", "xgboost", "click"],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
