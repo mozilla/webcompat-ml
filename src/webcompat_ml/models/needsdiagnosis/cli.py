@@ -32,9 +32,15 @@ def train(data, output):
 def predict(data, model, output):
     X = pandas.read_csv(data)
     model = joblib.load(model)
-    predictions = model.predict(X)
-    predictions = pandas.DataFrame(data=predictions, columns=["predictions"])
-    predictions.to_csv(output, index=False)
+    y_pred = model.predict(X)
+    y_pred_proba = model.predict_proba(X)
+    y_pred_labels = model.le.inverse_transform(y_pred)
+
+    output_predictions = pandas.DataFrame(data=y_pred_labels, columns=["needsdiagnosis"])
+    output_probas = pandas.DataFrame(data=y_pred_proba, columns=model.le.classes_)
+    output_probas = output_probas.add_prefix("proba_")
+    output_df = pandas.concat([output_predictions, output_probas], axis=1)
+    output_df.to_csv(output, index=False)
 
 
 @main.command()

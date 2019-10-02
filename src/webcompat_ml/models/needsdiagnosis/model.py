@@ -77,3 +77,9 @@ class NeedsDiagnosisModel(BaseEstimator, TransformerMixin, ClassifierMixin):
         title = self.tokenizer.transform(X["title"].values).toarray()
         X = numpy.hstack([body, title])
         return self.clf.predict(X)
+
+    def predict_proba(self, X):
+        body = self.tokenizer.transform(X["body"].values).toarray()
+        title = self.tokenizer.transform(X["title"].values).toarray()
+        X = numpy.hstack([body, title])
+        return self.clf.predict_proba(X)
