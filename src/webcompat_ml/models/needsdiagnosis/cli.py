@@ -36,7 +36,9 @@ def predict(data, model, output):
     y_pred_proba = model.predict_proba(X)
     y_pred_labels = model.le.inverse_transform(y_pred)
 
-    output_predictions = pandas.DataFrame(data=y_pred_labels, columns=["needsdiagnosis"])
+    output_predictions = pandas.DataFrame(
+        data=y_pred_labels, columns=["needsdiagnosis"]
+    )
     output_probas = pandas.DataFrame(data=y_pred_proba, columns=model.le.classes_)
     output_probas = output_probas.add_prefix("proba_")
     output_df = pandas.concat([output_predictions, output_probas], axis=1)

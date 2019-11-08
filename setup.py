@@ -16,7 +16,7 @@ setup(
     package_dir={"": "src"},
     entry_points={
         "console_scripts": [
-            "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main",
+            "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main"
         ]
     },
     install_requires=["scikit-learn", "pandas", "xgboost", "click"],
