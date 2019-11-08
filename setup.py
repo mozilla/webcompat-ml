@@ -14,17 +14,8 @@ setup(
     description="WebCompat machine learning pipeline",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    package_data={
-        "": [
-            "models/invalid/model.bin",
-            "models/invalid/encoders/*",
-            "models/invalid/metadata/*",
-            "utils/encoders/*.joblib",
-        ]
-    },
     entry_points={
         "console_scripts": [
-            "webcompat-ml-invalid=webcompat_ml.models.invalid.cli:main",
             "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main",
         ]
     },
