@@ -13,13 +13,7 @@ This project includes all the models and helper utils used in the ML pipeline of
 
 ## Documentation
 
-Full project documentation is at [docs][full-docs] folder.
-
-[full-docs]: ./docs
-
-## Models
-
-
+Full project documentation is hosted on https://webcompat-ml.readthedocs.io/
 
 ## License
 Mozilla Public License Version 2.0
