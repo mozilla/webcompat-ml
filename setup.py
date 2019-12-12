@@ -1,7 +1,3 @@
-import io
-import os
-import re
-
 from setuptools import find_packages
 from setuptools import setup
 
@@ -19,7 +15,15 @@ setup(
             "webcompat-ml-needsdiagnosis=webcompat_ml.models.needsdiagnosis.cli:main"
         ]
     },
-    install_requires=["scikit-learn", "pandas", "xgboost", "click"],
+    install_requires=[
+        "scikit-learn",
+        "pandas",
+        "xgboost",
+        "click",
+        "elasticsearch<7",
+        "certifi",
+        "tqdm",
+    ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
